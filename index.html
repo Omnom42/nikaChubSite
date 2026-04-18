@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ника Чубенко | Маникюр и Искусство</title>
+    <style>
+        /* Базовые переменные и шрифты */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap');
+
+        :root {
+            --text-dark: #2d2a32;
+            --text-light: #5a5560;
+            --accent: #8b5fbf;
+            --glass-bg: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Анимированный пастельный фон */
+        body {
+            color: var(--text-dark);
+            background: linear-gradient(-45deg, #fbc2eb, #a6c1ee, #fdcbf1, #e6dee9);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Общий стиль для эффекта стекла (Glassmorphism) */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: 24px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        /* Навигация (Плавающая таблетка) */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            padding: 1rem 2.5rem;
+            display: flex;
+            gap: 2rem;
+            border-radius: 50px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* Главный экран (Hero) */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+            color: #fff;
+            text-shadow: 2px 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--text-dark);
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+            line-height: 1.6;
+        }
+
+        .hero-img-container {
+            width: 300px;
+            height: 400px;
+            border-radius: 150px 150px 20px 20px;
+            overflow: hidden;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        .hero-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 140px 140px 15px 15px;
+        }
+
+        /* Заголовки секций */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            color: #fff;
+            text-shadow: 1px 2px 10px rgba(0,0,0,0.1);
+            text-transform: uppercase;
+        }
+
+        /* Обо мне */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            padding: 3rem;
+        }
+
+        .about-text p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .about-text span {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Галерея (Мои работы) */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            padding: 10px;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 350px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .gallery-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-caption {
+            text-align: center;
+            margin-top: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        /* Навыки */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(1.05);
+        }
+
+        /* Образование (Таймлайн / Карточки) */
+        .edu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .edu-card {
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .edu-card h3 {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .edu-card p {
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        /* Достижения */
+        .achievements-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .ach-item {
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 1.2rem;
+            line-height: 1.5;
+            transition: transform 0.3s;
+        }
+
+        .ach-item:hover {
+            transform: translateX(10px);
+        }
+
+        .ach-icon {
+            font-size: 2rem;
+        }
+
+        /* Контакты */
+        .contact-wrap {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .contact-wrap h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .contact-links a {
+            padding: 1rem 2rem;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+        .contact-links a:hover {
+            background: #fff;
+            color: var(--accent);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Анимация при скролле */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Адаптив */
+        @media (max-width: 900px) {
+            .about-content { grid-template-columns: 1fr; }
+            nav { display: none; } /* Скрываем плавающую панель на телефонах для простоты */
+            .hero-img-container { width: 250px; height: 330px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="glass">
+        <a href="#about">Обо мне</a>
+        <a href="#skills">Навыки</a>
+        <a href="#education">Образование</a>
+        <a href="#achievements">Достижения</a>
+        <a href="#contact">Контакты</a>
+    </nav>
+
+    <section class="hero">
+        <h1 class="reveal active">НИКА ЧУБЕНКО</h1>
+        <h2 class="reveal active">Художник и нейл-мастер. Объединяю любовь к живописи и архитектуру ногтей на миниатюрных холстах.</h2>
+        
+        <div class="glass hero-img-container reveal active">
+            <img src="улыбака.jpeg" alt="плов">
+        </div>
+    </section>
+
+    <section id="about" class="container reveal">
+        <h2 class="section-title">ОБО МНЕ</h2>
+        
+        <div class="about-content">
+            <div class="glass about-text">
+                <p>Привет! Меня зовут Ника, и вся моя жизнь пронизана любовью к <span>искусству</span>.</p>
+                <p>Я рисую с самого детства: холсты, скетчбуки, акварель. Но в какой-то момент я поняла, что холстом могут быть руки. Отучившись на мастера маникюра, я нашла идеальный баланс.</p>
+                <p>Для меня маникюр — это не просто процедура. Это возможность создавать <span>миниатюрные картины</span>, которые клиент носит с собой каждый день. Моя цель — создавать эстетику, которая делает людей счастливее.</p>
+            </div>
+
+            <div class="gallery">
+                <div class="glass gallery-item">
+                    <div class="gallery-img">
+                        <img src="ника.jpg" alt="нюд">
+                    </div>
+                    <div class="gallery-caption">Нюд</div>
+                </div>
+                <div class="glass gallery-item">
+                    <div class="gallery-img">
+                        <img src="френч.jpg" alt="френч">
+                    </div>
+                    <div class="gallery-caption">Френч</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="container reveal">
+        <h2 class="section-title">НАВЫКИ</h2>
+        <p style="text-align: center; margin-bottom: 3rem; color: var(--text-light); font-size: 1.2rem;">Прочитав информацию обо мне, ты уже понимаешь, что я могу предложить...</p>
+        
+        <div class="skills-grid">
+            <div class="glass skill-tag">Художественная роспись (Арт-дизайн)</div>
+            <div class="glass skill-tag">Акварельная техника</div>
+            <div class="glass skill-tag">Живопись и Скетчинг</div>
+            <div class="glass skill-tag">Классический и аппаратный маникюр</div>
+            <div class="glass skill-tag">Восстановление архитектуры ногтя</div>
+            <div class="glass skill-tag">Моделирование и укрепление</div>
+            <div class="glass skill-tag">Сложный френч</div>
+        </div>
+    </section>
+
+    <section id="education" class="container reveal">
+        <h2 class="section-title">ОБРАЗОВАНИЕ</h2>
+        
+        <div class="edu-grid">
+            <div class="glass edu-card">
+                <h3>Художественная школа</h3>
+                <p>Моя база и фундамент. Изучение композиции, колористики, света и тени. Рисование натюрмортов и портретов развило во мне насмотренность и твердость руки, что сейчас безумно помогает в тонкой росписи.</p>
+            </div>
+            
+            <div class="glass edu-card">
+                <h3>Базовый курс маникюра</h3>
+                <p>Тот самый момент, когда я решила перенести искусство на ногти. Изучение строения ногтевой пластины, безопасной обработки, стерилизации и правильной архитектуры. Теория и много практики на моделях.</p>
+            </div>
+
+            <div class="glass edu-card">
+                <h3>Повышение квалификации</h3>
+                <p>Курсы по сложным дизайнам и росписи ногтей. Я постоянно учусь новому: от акварельных капель до создания эффекта объема и аквариумного дизайна. Искусство не стоит на месте, и я развиваюсь вместе с ним.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements" class="container reveal">
+        <h2 class="section-title">ДОСТИЖЕНИЯ</h2>
+        <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light);">Скажу честно... самые масштабные победы еще впереди, но за последний год я:</p>
+        
+        <div class="achievements-list">
+            <div class="glass ach-item">
+                <div class="ach-icon">✨</div>
+                <div>Успешно перенесла сложную художественную роспись с формата А4 на ногтевую пластину.</div>
+            </div>
+            <div class="glass ach-item">
+                <div class="ach-icon">🎨</div>
+                <div>Собрала собственную уникальную палитру авторских дизайнов и рисунков.</div>
+            </div>
+            <div class="glass ach-item">
+                <div class="ach-icon">💅</div>
+                <div>Выработала технику тонких линий, благодаря которой дизайны выглядят как печать.</div>
+            </div>
+            <div class="glass ach-item">
+                <div class="ach-icon">🏆</div>
+                <div>Десятки счастливых клиенток, чьи руки превратились в настоящие произведения искусства.</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container reveal">
+        <div class="glass contact-wrap">
+            <p style="text-transform: uppercase; letter-spacing: 2px; color: var(--text-light);">Не будем прощаться...</p>
+            <h2>LET'S CREATE ART</h2>
+            <p style="font-size: 1.2rem; color: var(--text-dark);">Я всегда рада новым клиентам и творческим проектам.<br>Для меня будет удовольствием поработать с тобой :)</p>
+            
+            <div class="contact-links">
+                <a href="https://t.me/nnni000" class="glass" target="_blank">Telegram</a>
+            </div>
+            
+            <p style="font-weight: 600; color: var(--accent);">Ника</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 NIKA CHUBENKO. Все права защищены. Искусство в каждой детали.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal');
+            revealElements.forEach((el) => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
